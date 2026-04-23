@@ -572,6 +572,154 @@ section{opacity:1}
 /* Badge override to match site dark theme */
 .li-badge-wrap{opacity:.85;transition:opacity .2s;filter:grayscale(15%)}
 .li-badge-wrap:hover{opacity:1;filter:grayscale(0%)}
+
+/* ─── POLISH OVERRIDES ─── */
+
+/* Deeper, richer background */
+:root {
+  --bg:#04080600;
+  --bg:#050908;
+  --bg2:#0b1410;
+  --bg3:#111d18;
+  --teal:#00c9ac;
+  --teal2:#00e8a8;
+  --border:rgba(0,201,172,0.1);
+  --border2:rgba(0,201,172,0.18);
+  --glass:rgba(0,201,172,0.035);
+  --dim:#6b9490;
+}
+
+/* Nav — tighter, more refined */
+nav { height:72px; padding:0 56px; border-bottom:1px solid transparent; transition:background .5s,border-color .5s }
+nav.scrolled { border-bottom-color:var(--border); background:rgba(5,9,8,.92) }
+.nav-logo { gap:12px }
+.nav-logo span { font-size:.8rem; font-weight:300; letter-spacing:.12em; opacity:1; color:var(--white) }
+.nav-experts-btn { padding:8px 18px; font-size:.58rem; letter-spacing:.2em; border-color:var(--border2) }
+
+/* Hero — tighter line height, more punch */
+.hero-title { line-height:.9; letter-spacing:-.04em }
+.hero-title em { letter-spacing:-.04em }
+.hero-label { letter-spacing:.35em; opacity:.7 }
+.hero-sub { letter-spacing:.2em; opacity:.45 }
+
+/* Marquee — slightly more visible */
+.marquee-wrap { opacity:.35; padding:18px 0 }
+.marquee-inner span { font-size:.65rem; letter-spacing:.22em }
+
+/* Stats — more breathing room, refined number size */
+.stat-item { padding:72px 48px }
+.stat-num { font-size:clamp(3rem,4.5vw,5rem); letter-spacing:-.03em }
+.stat-lbl { font-size:.58rem; letter-spacing:.25em; margin-top:16px; opacity:.55 }
+.stat-item::after { content:''; position:absolute; bottom:0; left:48px; right:48px; height:1px; background:var(--teal); opacity:0; transition:opacity .4s; transform:scaleX(0); transform-origin:left; transition:transform .5s cubic-bezier(.2,0,0,1) }
+.stat-item:hover::after { opacity:.25; transform:scaleX(1) }
+
+/* Section — more generous spacing */
+section { padding:160px 64px }
+
+/* Services — card refinement */
+.services-title { letter-spacing:-.02em; line-height:1.0 }
+.service-card { padding:64px 56px; transition:background .5s }
+.service-name { font-size:clamp(1.5rem,2.5vw,2.2rem); letter-spacing:-.01em }
+.service-desc { font-size:.68rem; line-height:1.9; letter-spacing:.04em }
+.service-num { font-size:.55rem; letter-spacing:.3em; margin-bottom:40px }
+.service-icon svg { color:var(--teal); opacity:.7 }
+
+/* Pricing — card weight */
+.pricing-title { letter-spacing:-.02em }
+.price-card { padding:52px 40px; transition:background .5s,border-color .5s }
+.price-size { font-size:5rem; letter-spacing:-.04em }
+.price-amount { font-size:2rem; letter-spacing:-.02em }
+.price-card.featured { border-color:rgba(0,201,172,.25); box-shadow:0 0 0 1px rgba(0,201,172,.06) }
+.price-badge { font-size:.52rem; letter-spacing:.18em; padding:5px 14px }
+
+/* Coverage — emirate items */
+.emirate-item { padding:22px 0; font-size:.7rem; letter-spacing:.1em }
+.emirate-name { opacity:.85 }
+.info-card { padding:36px; background:rgba(0,201,172,.025); border-color:var(--border) }
+.info-card:hover { background:rgba(0,201,172,.05); border-color:var(--border2) }
+.info-card-val { font-size:1.2rem; letter-spacing:-.01em }
+
+/* Certs — card refinement */
+.certs-title { letter-spacing:-.02em }
+.cert-card { padding:44px; gap:28px; transition:background .4s }
+.cert-title { font-size:1.15rem; letter-spacing:-.01em; margin-bottom:10px }
+.cert-desc { font-size:.64rem; line-height:1.7; letter-spacing:.04em }
+
+/* Contact — card refinement */
+.contact-title { letter-spacing:-.02em; line-height:.95 }
+.contact-method { padding:22px 28px; transition:border-color .3s,padding-left .4s,background .3s }
+.contact-method:hover { padding-left:36px; background:rgba(0,201,172,.03) }
+.contact-method-val { font-size:1.05rem; letter-spacing:-.01em }
+.contact-method-label { letter-spacing:.15em; font-size:.58rem }
+.form-input,.form-select,.form-textarea { padding:18px 22px; font-size:.72rem; letter-spacing:.04em; background:rgba(0,201,172,.02) }
+.form-submit { padding:18px 36px; font-size:.68rem; letter-spacing:.22em }
+
+/* About section refinement */
+.about-heading { font-size:clamp(2rem,3.8vw,3.4rem); letter-spacing:-.02em; line-height:1.05 }
+.about-body { font-size:.72rem; line-height:2; letter-spacing:.04em }
+.about-photo { filter:grayscale(10%) brightness(.95); transition:filter .5s }
+.about-photo-wrap:hover .about-photo { filter:grayscale(0%) brightness(1) }
+.ajman-cert { border-color:rgba(0,201,172,.2); padding:18px 26px; margin-top:36px }
+.ajman-cert-title { font-size:.62rem; letter-spacing:.14em }
+.ajman-cert-ref { font-size:.57rem; letter-spacing:.08em; opacity:.55 }
+
+/* B2B section */
+.b2b-heading { letter-spacing:-.02em; line-height:1.0 }
+.b2b-card { padding:44px 36px; transition:background .4s }
+.b2b-card-title { font-size:1.25rem; letter-spacing:-.01em; margin-bottom:14px }
+.b2b-card-desc { font-size:.64rem; line-height:1.8; letter-spacing:.04em }
+.b2b-amc { padding:52px; border-color:rgba(0,201,172,.18) }
+.b2b-amc-title { font-size:1.7rem; letter-spacing:-.02em; line-height:1.1 }
+.b2b-amc-desc { font-size:.69rem; line-height:1.9; letter-spacing:.04em }
+.b2b-amc-price { font-size:.66rem; letter-spacing:.12em; opacity:.8 }
+.b2b-feature { font-size:.64rem; line-height:1.7; letter-spacing:.04em }
+
+/* Footer refinement */
+footer { padding:100px 64px 48px }
+.footer-brand-name { font-size:1.6rem; letter-spacing:-.01em }
+.footer-brand-desc { font-size:.64rem; line-height:1.9; letter-spacing:.05em }
+.footer-col-title { font-size:.58rem; letter-spacing:.22em; margin-bottom:28px }
+.footer-col ul { gap:14px }
+.footer-col ul a { font-size:.64rem; letter-spacing:.06em }
+.footer-bottom { font-size:.58rem; letter-spacing:.12em; padding-top:44px }
+
+/* Reveal — smoother */
+.reveal { transform:translateY(32px); transition:opacity 1s cubic-bezier(.2,0,0,1),transform 1s cubic-bezier(.2,0,0,1) }
+
+/* LinkedIn section */
+.linkedin-heading { letter-spacing:-.02em }
+.li-card { padding:32px; transition:border-color .3s,background .3s }
+.li-name { font-size:1rem; letter-spacing:-.01em }
+.li-text { font-size:.66rem; line-height:1.8; letter-spacing:.04em }
+
+/* Govt signal */
+.govt-partner { font-size:.62rem; letter-spacing:.1em; gap:10px }
+.govt-label { font-size:.6rem; letter-spacing:.22em }
+
+/* Progress bar refinement */
+.progress-bar { height:1.5px }
+
+/* WA FAB refinement */
+.wa-fab { width:48px; height:48px; border-color:rgba(0,201,172,.3) }
+
+/* Back to top */
+.back-top { width:40px; height:40px }
+
+/* Mobile refinements */
+@media(max-width:900px) {
+  section { padding:100px 32px }
+  nav { padding:0 32px; height:68px }
+  footer { padding:80px 32px 40px }
+  .stat-item { padding:52px 32px }
+  .service-card { padding:48px 36px }
+}
+@media(max-width:600px) {
+  section { padding:80px 24px }
+  nav { padding:0 20px }
+  footer { padding:60px 24px 32px }
+  .stat-item { padding:40px 24px }
+}
+
 </style>
 </head>
 <body>

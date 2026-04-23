@@ -256,6 +256,29 @@ section{padding:140px 48px}
 .form-submit{padding:16px 32px;background:var(--teal);color:var(--bg);font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:400;transition:background .2s,transform .2s}
 .form-submit:hover{background:var(--teal2);transform:translateY(-2px)}
 
+
+/* ─── LINKEDIN SECTION ─── */
+.linkedin-section{padding:120px 48px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.linkedin-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.linkedin-left{}
+.linkedin-tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.linkedin-tag::before{content:'';display:inline-block;width:24px;height:1px;background:var(--teal)}
+.linkedin-heading{font-size:clamp(2rem,4vw,3.2rem);font-weight:300;font-style:italic;line-height:1.1;margin-bottom:20px}
+.linkedin-sub{font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;line-height:1.8;color:var(--dim);margin-bottom:36px}
+.linkedin-follow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(0,196,167,.3);padding:12px 24px;transition:border-color .2s,background .2s;text-decoration:none}
+.linkedin-follow:hover{border-color:var(--teal);background:rgba(0,196,167,.06)}
+.linkedin-follow svg{flex-shrink:0}
+.linkedin-embed-wrap{position:relative}
+.linkedin-embed-frame{background:var(--bg);border:1px solid var(--border);overflow:hidden;position:relative}
+.linkedin-embed-frame::before{content:'Latest Post';position:absolute;top:0;left:0;right:0;padding:10px 16px;font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);background:var(--bg2);border-bottom:1px solid var(--border);z-index:2;opacity:.7}
+.linkedin-embed-frame iframe{display:block;width:100%;margin-top:36px;border:none;filter:grayscale(20%) brightness(0.92);transition:filter .3s}
+.linkedin-embed-frame:hover iframe{filter:grayscale(0%) brightness(1)}
+@media(max-width:768px){
+  .linkedin-inner{grid-template-columns:1fr;gap:48px}
+  .linkedin-section{padding:80px 24px}
+  .linkedin-embed-frame iframe{width:100%!important}
+}
+
 /* ─── FOOTER ─── */
 footer{background:var(--bg);border-top:1px solid var(--border);padding:80px 48px 40px}
 .footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:64px;margin-bottom:80px}
@@ -749,8 +772,42 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:80px 48px
   </div>
 </section>
 
-<!-- Footer -->
-<footer>
+<!-- LinkedIn -->
+<section class="linkedin-section">
+  <div class="linkedin-inner">
+    <div class="linkedin-left reveal">
+      <div class="linkedin-tag">Social Proof</div>
+      <h2 class="linkedin-heading">Follow Our Work<br><em style="color:var(--teal)">On LinkedIn.</em></h2>
+      <p class="linkedin-sub">
+        Updates on projects, compliance news,<br>
+        and environmental protection across the UAE.
+      </p>
+      <a href="https://www.linkedin.com/company" target="_blank" class="linkedin-follow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+          <rect x="0" y="4.5" width="3" height="9.5" rx=".5"/>
+          <circle cx="1.5" cy="1.5" r="1.5"/>
+          <path d="M5 4.5h2.8v1.4h.04A3.06 3.06 0 0 1 10.6 4.3C13 4.3 14 5.7 14 8v6h-3V8.6c0-1.1-.02-2.5-1.53-2.5-1.53 0-1.77 1.2-1.77 2.43V14H5V4.5Z"/>
+        </svg>
+        Follow ECO Environmental
+      </a>
+    </div>
+    <div class="linkedin-embed-wrap reveal" style="transition-delay:.15s">
+      <div class="linkedin-embed-frame">
+        <iframe
+          src="https://www.linkedin.com/embed/feed/update/urn:li:share:7453052603329855488?collapsed=1"
+          height="400"
+          width="100%"
+          frameborder="0"
+          allowfullscreen=""
+          title="ECO Environmental — LinkedIn Post"
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer --><footer>
   <div class="footer-top">
     <div class="footer-brand reveal">
       <div class="footer-brand-name">ECO Environmental</div>

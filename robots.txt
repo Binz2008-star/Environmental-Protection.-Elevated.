@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://eco-environmental-uae.netlify.app/sitemap.xml
+Sitemap: https://binz2008-star.github.io/Environmental-Protection.-Elevated./sitemap.xml

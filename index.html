@@ -2,6 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11097082238"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-11097082238');
+
+  // Track WhatsApp clicks as conversions
+  function gtagWhatsApp() {
+    gtag('event', 'conversion', {
+      'send_to': 'AW-11097082238',
+      'event_category': 'engagement',
+      'event_label': 'whatsapp_click'
+    });
+  }
+  // Track Experts modal WhatsApp submit as conversion
+  function gtagIntelSubmit() {
+    gtag('event', 'conversion', {
+      'send_to': 'AW-11097082238',
+      'event_category': 'lead',
+      'event_label': 'intel_modal_submit'
+    });
+  }
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ECO Environmental Protection Services — UAE Since 2016</title>
 
@@ -397,7 +422,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:80px 48px
 <div class="cursor-ring" id="cursorRing"></div>
 
 <!-- WhatsApp FAB -->
-<a href="https://wa.me/971522233989" class="wa-fab" target="_blank" title="WhatsApp">
+<a href="https://wa.me/971522233989" class="wa-fab" target="_blank" title="WhatsApp" onclick="gtagWhatsApp()">
   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.3" xmlns="http://www.w3.org/2000/svg">
     <path d="M11 1C5.477 1 1 5.24 1 10.47c0 1.66.46 3.21 1.26 4.54L1 21l6.18-1.56A10.1 10.1 0 0 0 11 19.94C16.523 19.94 21 15.7 21 10.47S16.523 1 11 1Z"/>
     <path d="M7.5 8.5c.2-.5.5-.9.9-1 .3-.08.6 0 .8.3l1 1.8c.15.28.1.62-.1.86l-.5.57c.4.8 1.1 1.5 1.9 1.9l.57-.5c.24-.2.58-.25.86-.1l1.8 1c.3.2.38.5.3.8-.1.4-.5.7-1 .9C11 16 7 12.5 7.5 8.5Z"/>
@@ -1148,6 +1173,7 @@ function intelBack() {
 }
 
 function intelSubmit() {
+  gtagIntelSubmit();
   const name = document.getElementById('intelName').value.trim() || 'N/A';
   const phone = document.getElementById('intelPhone').value.trim() || 'N/A';
   document.getElementById('intelStep2').style.display = 'none';
@@ -1160,7 +1186,7 @@ function intelSubmit() {
     '\n\nSent via ECO Intelligence'
   );
   setTimeout(function() {
-    window.open('https://wa.me/971522233989?text=' + text, '_blank');
+    gtagWhatsApp(); window.open('https://wa.me/971522233989?text=' + text, '_blank');
     setTimeout(closeIntel, 1500);
   }, 2200);
 }

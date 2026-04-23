@@ -3,7 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11097082238"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11097082238">
+/* ─── BILINGUAL TOGGLE ─── */
+const translations = {
+  en: {
+    'hero-label': 'Protecting UAE Waters Since 2016',
+    'hero-title-html': 'Environmental<br>Protection.<br><em>Elevated.</em>',
+    'nav-logo-text': 'ECO Environmental',
+    'lang-btn': 'AR',
+    'about-tag': 'Who We Are',
+    'about-heading-html': 'Government-Level<br><em style="color:var(--teal)">Environmental Partner.</em>',
+    'b2b-tag': 'Institutional & Corporate',
+    'b2b-heading-html': 'Built for Facilities<br><em style="color:var(--teal)">That Cannot Fail.</em>',
+  },
+  ar: {
+    'hero-label': 'نحمي مياه الإمارات منذ 2016',
+    'hero-title-html': 'حماية البيئة.<br><em>على أعلى مستوى.</em>',
+    'nav-logo-text': 'إيكو للبيئة',
+    'lang-btn': 'EN',
+    'about-tag': 'من نحن',
+    'about-heading-html': 'شريك بيئي<br><em style="color:var(--teal)">على المستوى الحكومي.</em>',
+    'b2b-tag': 'المؤسسات والشركات',
+    'b2b-heading-html': 'حلول للمنشآت<br><em style="color:var(--teal)">التي لا تقبل التوقف.</em>',
+  }
+};
+
+let currentLang = 'en';
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'ar' : 'en';
+  const isAr = currentLang === 'ar';
+  document.documentElement.setAttribute('dir', isAr ? 'rtl' : 'ltr');
+  document.documentElement.setAttribute('lang', currentLang);
+  document.getElementById('langBtn').textContent = isAr ? 'EN' : 'AR';
+
+  const t = translations[currentLang];
+
+  const heroLabel = document.querySelector('.hero-label');
+  if (heroLabel) heroLabel.textContent = t['hero-label'];
+
+  const heroTitle = document.querySelector('.hero-title');
+  if (heroTitle) heroTitle.innerHTML = t['hero-title-html'];
+
+  const aboutTag = document.querySelector('.about-tag');
+  if (aboutTag) aboutTag.textContent = t['about-tag'];
+
+  const aboutHeading = document.querySelector('.about-heading');
+  if (aboutHeading) aboutHeading.innerHTML = t['about-heading-html'];
+
+  const b2bTag = document.querySelector('.b2b-tag');
+  if (b2bTag) b2bTag.textContent = t['b2b-tag'];
+
+  const b2bHeading = document.querySelector('.b2b-heading');
+  if (b2bHeading) b2bHeading.innerHTML = t['b2b-heading-html'];
+
+  const logoSpan = document.querySelector('.nav-logo span');
+  if (logoSpan) logoSpan.textContent = t['nav-logo-text'];
+}
+
+</script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -282,6 +340,75 @@ section{padding:140px 48px}
 .form-submit:hover{background:var(--teal2);transform:translateY(-2px)}
 
 
+
+/* ─── LANG TOGGLE ─── */
+.lang-toggle{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--dim);border:1px solid var(--border);padding:5px 12px;cursor:pointer;transition:color .2s,border-color .2s}
+.lang-toggle:hover{color:var(--teal);border-color:rgba(0,196,167,.4)}
+[dir="rtl"] body,[dir="rtl"]{direction:rtl;text-align:right}
+
+/* ─── CONFERENCE / ABOUT SECTION ─── */
+.about-section{padding:120px 48px;background:var(--bg)}
+.about-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-photo-wrap{position:relative}
+.about-photo{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center top;filter:grayscale(15%) brightness(.92);border:1px solid var(--border);display:block}
+.about-photo-cap{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(6,11,9,.92));font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--white);opacity:.85;display:flex;align-items:center;gap:8px}
+.about-photo-cap::before{content:'';width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0}
+.about-tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.about-tag::before{content:'';display:inline-block;width:24px;height:1px;background:var(--teal)}
+.about-heading{font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;font-style:italic;line-height:1.1;margin-bottom:24px}
+.about-body{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;line-height:1.9;color:var(--dim);margin-bottom:32px}
+.about-badge{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--border);padding:12px 20px;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--dim)}
+.about-badge-dot{width:8px;height:8px;background:var(--teal);border-radius:50%;animation:blink 2s infinite}
+.shopfront-wrap{margin-top:16px;position:relative}
+.shopfront-img{width:100%;object-fit:cover;height:180px;filter:grayscale(15%) brightness(.88);border:1px solid var(--border);display:block}
+.shopfront-cap{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;color:var(--dim);margin-top:10px;opacity:.6}
+
+/* ─── B2B INSTITUTIONAL SECTION ─── */
+.b2b-section{padding:120px 48px;background:var(--bg2);border-top:1px solid var(--border)}
+.b2b-inner{max-width:1100px;margin:0 auto}
+.b2b-tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.b2b-tag::before{content:'';display:inline-block;width:24px;height:1px;background:var(--teal)}
+.b2b-heading{font-size:clamp(2rem,4vw,3.5rem);font-weight:300;font-style:italic;line-height:1.05;margin-bottom:16px}
+.b2b-sub{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;line-height:1.8;color:var(--dim);margin-bottom:64px;max-width:600px}
+.b2b-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-bottom:64px}
+.b2b-card{background:var(--bg);padding:40px 32px;transition:background .3s}
+.b2b-card:hover{background:var(--bg2)}
+.b2b-card-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;display:block;opacity:.7}
+.b2b-card-title{font-size:1.2rem;font-style:italic;font-weight:300;margin-bottom:12px}
+.b2b-card-desc{font-family:var(--mono);font-size:.65rem;letter-spacing:.04em;line-height:1.75;color:var(--dim)}
+.b2b-amc{border:1px solid rgba(0,196,167,.2);padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.b2b-amc-left{}
+.b2b-amc-title{font-size:1.6rem;font-style:italic;font-weight:300;margin-bottom:16px}
+.b2b-amc-desc{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;line-height:1.8;color:var(--dim);margin-bottom:24px}
+.b2b-amc-price{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;color:var(--teal);margin-bottom:24px}
+.b2b-amc-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;padding:14px 28px;background:var(--teal);color:var(--bg);transition:background .2s;text-decoration:none}
+.b2b-amc-btn:hover{background:var(--teal2)}
+.b2b-amc-right{display:flex;flex-direction:column;gap:12px}
+.b2b-feature{display:flex;align-items:flex-start;gap:12px;font-family:var(--mono);font-size:.65rem;letter-spacing:.04em;line-height:1.6;color:var(--dim)}
+.b2b-feature-dot{width:4px;height:4px;background:var(--teal);border-radius:50%;flex-shrink:0;margin-top:6px}
+
+/* ─── AJMAN CERT BADGE ─── */
+.ajman-cert{display:inline-flex;align-items:center;gap:16px;border:1px solid rgba(0,196,167,.25);padding:16px 24px;margin-top:32px;background:var(--glass)}
+.ajman-cert-seal{width:36px;height:36px;border:1px solid rgba(0,196,167,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.55rem;color:var(--teal);flex-shrink:0}
+.ajman-cert-text{}
+.ajman-cert-title{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);display:block;margin-bottom:4px}
+.ajman-cert-ref{font-family:var(--mono);font-size:.55rem;color:var(--dim);letter-spacing:.08em}
+
+/* ─── GOVT SIGNAL ─── */
+.govt-signal{background:var(--bg);border-top:1px solid var(--border);padding:60px 48px}
+.govt-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.govt-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);opacity:.6;flex-shrink:0}
+.govt-partners{display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.govt-partner{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--dim);opacity:.5;display:flex;align-items:center;gap:8px;transition:opacity .2s}
+.govt-partner:hover{opacity:.9}
+.govt-partner-dot{width:5px;height:5px;background:var(--teal);border-radius:50%;opacity:.6}
+
+@media(max-width:900px){
+  .about-inner,.b2b-amc{grid-template-columns:1fr;gap:40px}
+  .about-section,.b2b-section,.govt-signal{padding:80px 24px}
+  .b2b-grid{grid-template-columns:1fr}
+}
+
 /* ─── LINKEDIN SECTION ─── */
 .linkedin-section{padding:120px 48px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .linkedin-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
@@ -447,6 +574,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:80px 48px
   <span style="font-family:var(--serif);font-style:italic;font-size:.95rem;font-weight:300;letter-spacing:.06em;color:var(--white);opacity:.9">ECO Environmental</span>
 </a>
   <div class="nav-right">
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">AR</button>
     <button class="nav-experts-btn" onclick="openIntel()">
       <span class="nav-experts-dot"></span>
       Experts ↗
@@ -499,6 +627,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:80px 48px
     <button onclick="toggleMenu()" style="font-size:1.4rem;opacity:.5;transition:opacity .2s" onmouseenter="this.style.opacity=1" onmouseleave="this.style.opacity=.5">✕</button>
   </div>
   <div class="overlay-nav">
+    <a href="#about" class="overlay-link" onclick="toggleMenu()">About</a>
+    <a href="#b2b" class="overlay-link" onclick="toggleMenu()">Institutional</a>
     <a href="#services" class="overlay-link" onclick="toggleMenu()">Services</a>
     <a href="#pricing" class="overlay-link" onclick="toggleMenu()">Pricing</a>
     <a href="#coverage" class="overlay-link" onclick="toggleMenu()">Coverage</a>
@@ -508,7 +638,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:80px 48px
   <div class="overlay-foot">
     <span>+971 52 223 3989</span>
     <span>robenedwan@gmail.com</span>
-    <span>© 2024</span>
+    <span>© 2026</span>
   </div>
 </div>
 
@@ -532,15 +662,15 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:80px 48px
     <span>ISO 14001 Certified <span class="sep">•</span></span>
     <span>Municipality Approved <span class="sep">•</span></span>
     <span>ISO 9001 <span class="sep">•</span></span>
-    <span>100% Compliance Rate <span class="sep">•</span></span>
+    <span>4.53/5 Client Satisfaction <span class="sep">•</span></span>
     <span>24/7 Emergency Services <span class="sep">•</span></span>
     <span>All UAE Emirates <span class="sep">•</span></span>
     <span>500+ Projects <span class="sep">•</span></span>
-    <span>Eco-First Approach <span class="sep">•</span></span>
+    <span>95% Client Retention <span class="sep">•</span></span>
     <span>ISO 14001 Certified <span class="sep">•</span></span>
     <span>Municipality Approved <span class="sep">•</span></span>
     <span>ISO 9001 <span class="sep">•</span></span>
-    <span>100% Compliance Rate <span class="sep">•</span></span>
+    <span>4.53/5 Client Satisfaction <span class="sep">•</span></span>
     <span>24/7 Emergency Services <span class="sep">•</span></span>
     <span>All UAE Emirates <span class="sep">•</span></span>
     <span>500+ Projects <span class="sep">•</span></span>
@@ -552,23 +682,117 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:80px 48px
 <section class="stats-section" style="padding:0">
   <div class="stats-grid reveal">
     <div class="stat-item">
-      <span class="stat-num">2016</span>
-      <span class="stat-lbl">Year Established</span>
-    </div>
-    <div class="stat-item">
       <span class="stat-num">80<sup style="font-size:.5em">+</sup></span>
-      <span class="stat-lbl">Active Clients</span>
+      <span class="stat-lbl">Active Clients UAE-Wide</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num">500<sup style="font-size:.5em">+</sup></span>
-      <span class="stat-lbl">Projects Completed</span>
+      <span class="stat-num">4.53<sup style="font-size:.45em">/5</sup></span>
+      <span class="stat-lbl">Client Satisfaction</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num">100<sup style="font-size:.45em">%</sup></span>
-      <span class="stat-lbl">Compliance Rate</span>
+      <span class="stat-num">95<sup style="font-size:.45em">%</sup></span>
+      <span class="stat-lbl">Client Retention Rate</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">15K<sup style="font-size:.45em">L</sup></span>
+      <span class="stat-lbl">Grease Removed Monthly</span>
     </div>
   </div>
 </section>
+
+<!-- About / Conference -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-photo-wrap reveal">
+      <img src="img-conference.jpg" alt="Robin Edwan presenting at Ajman Environmental Conference" class="about-photo" loading="lazy">
+      <div class="about-photo-cap">Ajman Environmental Conference — Government of Ajman · Municipality &amp; Planning Department</div>
+      <div class="shopfront-wrap">
+        <img src="img-shopfront.jpg" alt="Eco Technology headquarters Ajman UAE" class="shopfront-img" loading="lazy">
+        <p class="shopfront-cap">Eco Technology Environmental Protection Services — Ajman, UAE</p>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.15s">
+      <div class="about-tag">Who We Are</div>
+      <h2 class="about-heading">Government-Level<br><em style="color:var(--teal)">Environmental Partner.</em></h2>
+      <p class="about-body">
+        Founded in 2016 and headquartered in Ajman, ECO Technology Environmental Protection Services operates at the intersection of private enterprise and public infrastructure. We are an approved vendor of Ajman Municipality, accredited by Dubai Municipality and the Abu Dhabi Environment Agency, and active partners in UAE smart environmental compliance initiatives.<br><br>
+        Presented at the official Ajman Environmental Conference and currently proposing the Smart Environmental Integration Initiative to Fujairah Municipality — a digital compliance platform linking food establishment licensing to environmental standards across the Emirates.
+      </p>
+      <div class="about-badge">
+        <span class="about-badge-dot"></span>
+        <span style="font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--white)">Active across all 7 UAE Emirates</span>
+      </div>
+      <div class="ajman-cert">
+        <div class="ajman-cert-seal">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="9" cy="9" r="7"/><path d="M6 9l2 2 4-4"/></svg>
+        </div>
+        <div class="ajman-cert-text">
+          <span class="ajman-cert-title">Ajman Municipality — Official Accreditation</span>
+          <span class="ajman-cert-ref">Ref: 01-PHE-021-16-QP0008 · Public Health Section · Since 2016</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B2B Institutional -->
+<section class="b2b-section" id="b2b">
+  <div class="b2b-inner">
+    <div class="b2b-tag reveal">Institutional &amp; Corporate</div>
+    <h2 class="b2b-heading reveal" style="transition-delay:.1s">Built for Facilities<br><em style="color:var(--teal)">That Cannot Fail.</em></h2>
+    <p class="b2b-sub reveal" style="transition-delay:.2s">Annual Maintenance Contracts for malls, hotels, hospitals, and industrial facilities across the UAE. Scheduled visits, 24/7 emergency response, full compliance documentation, and quarterly reporting — all under one agreement.</p>
+    <div class="b2b-grid reveal" style="transition-delay:.25s">
+      <div class="b2b-card">
+        <span class="b2b-card-label">Hospitality</span>
+        <h3 class="b2b-card-title">Hotels &amp; Resorts</h3>
+        <p class="b2b-card-desc">Grease trap maintenance, marine vessel servicing, and UCO collection. Full compliance with Dubai Municipality and all emirate authorities. 18 hotel clients currently active.</p>
+      </div>
+      <div class="b2b-card">
+        <span class="b2b-card-label">Retail &amp; Commercial</span>
+        <h3 class="b2b-card-title">Malls &amp; Food Courts</h3>
+        <p class="b2b-card-desc">High-volume grease trap management for multi-outlet food courts. Scheduled bi-monthly or monthly service cycles. Emergency call-out within 60–120 minutes. Currently serving Marsa Ajman Mall.</p>
+      </div>
+      <div class="b2b-card">
+        <span class="b2b-card-label">Healthcare &amp; Education</span>
+        <h3 class="b2b-card-title">Hospitals &amp; Institutions</h3>
+        <p class="b2b-card-desc">Environmental compliance for healthcare and educational facilities. ISO 14001 certified processes. Biological treatment systems to eliminate odours and extend drainage system lifespan.</p>
+      </div>
+    </div>
+    <div class="b2b-amc reveal" style="transition-delay:.3s">
+      <div class="b2b-amc-left">
+        <h3 class="b2b-amc-title">Annual Maintenance<br>Contract (AMC)</h3>
+        <p class="b2b-amc-desc">One agreement. Year-round coverage. No surprises. Our AMC model is designed for institutional clients who need guaranteed environmental compliance without managing multiple vendors.</p>
+        <p class="b2b-amc-price">Starting from AED 48,000 / year + 5% VAT</p>
+        <a href="https://wa.me/971522233989?text=Hello%20ECO%20Environmental%2C%20I%20am%20interested%20in%20an%20AMC%20proposal%20for%20my%20facility." target="_blank" class="b2b-amc-btn">Request AMC Proposal →</a>
+      </div>
+      <div class="b2b-amc-right">
+        <div class="b2b-feature"><span class="b2b-feature-dot"></span><span>Scheduled visits — 24 or 36 per year, your choice</span></div>
+        <div class="b2b-feature"><span class="b2b-feature-dot"></span><span>Emergency call-outs included — 60 to 120 min guaranteed response</span></div>
+        <div class="b2b-feature"><span class="b2b-feature-dot"></span><span>Waste disposal — up to 50 or 70m³ per month included</span></div>
+        <div class="b2b-feature"><span class="b2b-feature-dot"></span><span>Quarterly compliance reports with photographic documentation</span></div>
+        <div class="b2b-feature"><span class="b2b-feature-dot"></span><span>Full Ajman Municipality and UAE regulatory compliance</span></div>
+        <div class="b2b-feature"><span class="b2b-feature-dot"></span><span>Confined space entry protocols — mandatory PPE and gas detection</span></div>
+        <div class="b2b-feature"><span class="b2b-feature-dot"></span><span>Dedicated account manager and 24/7 hotline</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Government Signal -->
+<div class="govt-signal reveal">
+  <div class="govt-inner">
+    <span class="govt-label">Government &amp; Institutional Engagement</span>
+    <div class="govt-partners">
+      <span class="govt-partner"><span class="govt-partner-dot"></span>Ajman Municipality</span>
+      <span class="govt-partner"><span class="govt-partner-dot"></span>Dubai Municipality</span>
+      <span class="govt-partner"><span class="govt-partner-dot"></span>Abu Dhabi EAD</span>
+      <span class="govt-partner"><span class="govt-partner-dot"></span>Fujairah Municipality</span>
+      <span class="govt-partner"><span class="govt-partner-dot"></span>UAE Wildlife Society</span>
+      <span class="govt-partner"><span class="govt-partner-dot"></span>Marsa Properties</span>
+    </div>
+  </div>
+</div>
+
 
 <!-- Services -->
 <section id="services">

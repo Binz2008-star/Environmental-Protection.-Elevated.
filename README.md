@@ -1,13 +1,29 @@
-# ECO Environmental Protection Services
+# ECO Environmental Protection Services LLC
 ### Environmental Protection. Elevated.
 
-> Professional environmental services across all 7 UAE Emirates since 2016.
+> Government-level environmental services across all 7 UAE Emirates since 2016.
+> Approved vendor — Ajman Municipality · Dubai Municipality · Abu Dhabi EAD
 
 ---
 
 ## 🌐 Live Site
 
-**[binz2008-star.github.io/Environmental-Protection.-Elevated.](https://binz2008-star.github.io/Environmental-Protection.-Elevated./)**
+**[binz2008-star.github.io/eco-environmental-uae](https://binz2008-star.github.io/eco-environmental-uae)**
+
+---
+
+## About
+
+ECO Technology Environmental Protection Services LLC was founded in 2016 and is headquartered in Ajman, UAE. We operate at the intersection of private enterprise and public infrastructure — an approved vendor of Ajman Municipality (Ref: 01-PHE-021-16-QP0008), accredited by Dubai Municipality and the Abu Dhabi Environment Agency.
+
+Presented at the official Ajman Environmental Conference in the presence of His Highness Sheikh Ammar Al Nuaimi, Crown Prince of Ajman. Currently proposing the Smart Environmental Integration Initiative to Fujairah Municipality — a digital compliance platform linking food establishment licensing to environmental standards across the Emirates.
+
+**Key Stats:**
+- 80+ active clients UAE-wide
+- 4.53 / 5 client satisfaction rating
+- 95% client retention rate
+- 15,000+ litres of grease removed monthly
+- 40% growth in 2024
 
 ---
 
@@ -15,8 +31,8 @@
 
 | Service | Description |
 |---|---|
-| Grease Trap Cleaning & Maintenance | Regular servicing for commercial kitchens across UAE |
-| Grease Trap Supply & Installation | Sizes D / A / B / C — supply and professional fit |
+| Grease Trap Cleaning & Maintenance | Monthly servicing for commercial kitchens across UAE |
+| Grease Trap Supply & Installation | Sizes D / A / B / C — supply and professional installation |
 | Marine Vessel & Tank Cleaning | Dubai, Abu Dhabi, Sharjah, Ajman maritime facilities |
 | Used Cooking Oil (UCO) Collection | Responsible collection and recycling program |
 | High-Pressure Washing | Industrial and commercial pressure cleaning |
@@ -37,13 +53,40 @@
 
 ---
 
-## Certifications
+## Annual Maintenance Contract (AMC)
 
-- ISO 14001 — Environmental Management
-- ISO 9001 — Quality Management
-- Dubai Municipality Approved
-- Abu Dhabi EAD Certified
-- UAE Wildlife Society Member
+For institutional clients — malls, hotels, hospitals, industrial facilities.
+
+**Starting from AED 48,000 / year + 5% VAT**
+
+Includes:
+- 24 or 36 scheduled visits per year
+- Emergency call-out within 60–120 minutes guaranteed
+- Waste disposal up to 50–70m³/month
+- Quarterly compliance reports with photographic documentation
+- Full UAE regulatory compliance documentation
+- 24/7 dedicated hotline
+
+Current AMC clients include: Marsa Ajman Mall, Themar Al Bahar, Blue Marine Fisheries.
+
+---
+
+## Certifications & Accreditations
+
+- **ISO 14001** — Environmental Management System
+- **ISO 9001** — Quality Management System
+- **Ajman Municipality** — Official Accreditation (Ref: 01-PHE-021-16-QP0008)
+- **Dubai Municipality** — Approved supplier
+- **Abu Dhabi EAD** — Environment Agency accreditation
+- **UAE Wildlife Society** — Member
+
+---
+
+## Government & Institutional Engagement
+
+- Presented at Ajman Environmental Conference — Government of Ajman
+- Fujairah Municipality — Smart Environmental Integration Initiative (PPP proposal, 2.4–3.9M AED)
+- Active compliance partner across all 7 UAE Emirates
 
 ---
 
@@ -53,8 +96,9 @@
 |---|---|
 | Phone / WhatsApp | +971 52 223 3989 |
 | Email | robenedwan@gmail.com |
+| LinkedIn | linkedin.com/in/robin-edwan |
 | Hours | Sunday – Thursday, 8:00 AM – 6:00 PM |
-| Emergency | 24 / 7 all week |
+| Emergency | 24/7 all week |
 
 ---
 
@@ -69,14 +113,38 @@
 
 ---
 
+## Website Features
+
+| Feature | Detail |
+|---|---|
+| Design | Dark luxury aesthetic — Cormorant Garamond + DM Mono |
+| Animation | Canvas molecular particle simulation (hero) |
+| Intelligence Modal | AI-style service picker → WhatsApp lead capture |
+| Bilingual | Arabic / English toggle with RTL layout |
+| Real Photos | Ajman Environmental Conference + company headquarters |
+| Govt Badge | Ajman Municipality official accreditation displayed |
+| B2B Section | AMC institutional offering with pricing |
+| Visitor Counter | Live counter via CounterAPI |
+| SEO | Full meta tags, OG, Twitter card, sitemap, robots.txt |
+| Analytics | Google Ads tag (AW-11097082238) + conversion tracking |
+| LinkedIn | Profile badge + social proof card |
+| Performance | Pure HTML/CSS/JS — zero dependencies, zero build step |
+| Hosting | GitHub Pages — free, no bandwidth limits |
+
+---
+
 ## Tech Stack
 
 - Pure HTML / CSS / JS — zero dependencies, zero build step
 - Google Fonts: Cormorant Garamond + DM Mono
 - Canvas particle animation (molecular water simulation)
 - Scroll-reveal animations
-- WhatsApp direct integration
-- ECO Intelligence modal (AI-style service picker)
+- WhatsApp direct integration with Google Ads conversion tracking
+- ECO Intelligence modal (AI-style 3-step service picker)
+- Arabic/English bilingual toggle (RTL support)
+- Visitor counter (CounterAPI)
+- Google Ads (AW-11097082238)
+- LinkedIn profile badge integration
 - Deployed via GitHub Pages
 
 ---
@@ -85,14 +153,32 @@
 
 ```bash
 # Clone
-git clone https://github.com/Binz2008-star/Environmental-Protection.-Elevated..git
+git clone https://github.com/Binz2008-star/eco-environmental-uae.git
 
 # Open locally
 open index.html
 
-# No build required — push to main to deploy via GitHub Pages
+# No build required — push to main to deploy via GitHub Pages automatically
+```
+
+---
+
+## Repository Structure
+
+```
+/
+├── index.html          # Full website (single file)
+├── favicon.svg         # Teal molecular mark favicon
+├── 404.html            # Custom on-brand error page
+├── robots.txt          # Google indexing rules
+├── sitemap.xml         # Google sitemap
+├── img-conference.jpg  # Ajman Environmental Conference photo
+├── img-shopfront.jpg   # Company headquarters photo
+├── img-conference-linkedin.jpg  # LinkedIn-optimized photo
+└── README.md           # This file
 ```
 
 ---
 
 *© 2026 ECO Environmental Protection Services LLC — Ajman, UAE*
+*General Manager: Robin Edwan · +971 52 223 3989 · robenedwan@gmail.com*

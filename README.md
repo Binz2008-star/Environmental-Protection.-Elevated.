@@ -97,6 +97,7 @@ Current AMC clients include: Marsa Ajman Mall, Themar Al Bahar, Blue Marine Fish
 | Phone / WhatsApp | +971 52 223 3989 |
 | Email | robenedwan@gmail.com |
 | LinkedIn | linkedin.com/in/robin-edwan |
+| Instagram | [@ecotech.ae](https://www.instagram.com/ecotech.ae) |
 | Hours | Sunday – Thursday, 8:00 AM – 6:00 PM |
 | Emergency | 24/7 all week |
 

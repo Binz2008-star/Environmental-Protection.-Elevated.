@@ -849,7 +849,6 @@ footer { padding:100px 64px 48px }
     <p class="hero-label">Protecting UAE Waters Since 2016</p>
     <h1 class="hero-title">Environmental<br>Protection.<br><em>Elevated.</em></h1>
     <p class="hero-sub">Grease Traps · Marine Vessels · Biological Treatment · UCO Recycling</p>
-  <p class="hero-hint" id="heroHint">Touch the water</p>
   </div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
@@ -1431,256 +1430,108 @@ function toggleMenu() {
   document.body.style.overflow = menuOpen ? 'hidden' : '';
 }
 
-/* ─── HERO CANVAS — Rich Underwater World ─── */
+/* ─── HERO CANVAS — Molecular Particle System ─── */
 (function(){
   const c = document.getElementById('hero-canvas');
   const ctx = c.getContext('2d');
   let W = c.width = window.innerWidth;
   let H = c.height = window.innerHeight;
-  let mx = W/2, my = H/2, mouseActive = false;
-  const ripples = [], bursts = [];
-
   window.addEventListener('resize', () => {
     W = c.width = window.innerWidth;
     H = c.height = window.innerHeight;
     init();
   });
 
-  c.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; mouseActive = true; });
-  c.addEventListener('mouseleave', () => { mouseActive = false; });
-  window.addEventListener('click', e => {
-    if (e.clientY > window.innerHeight) return;
-    ripples.push({ x: e.clientX, y: e.clientY, r: 0, maxR: Math.min(W,H)*0.42, op: 0.75, sp: 3.8 });
-    ripples.push({ x: e.clientX, y: e.clientY, r: 0, maxR: Math.min(W,H)*0.26, op: 0.5, sp: 2.4, delay: 8 });
-    ripples.push({ x: e.clientX, y: e.clientY, r: 0, maxR: Math.min(W,H)*0.15, op: 0.35, sp: 1.6, delay: 16 });
-    for (let i = 0; i < 22; i++) {
-      const a = (i/22)*Math.PI*2, sp = 1.5 + Math.random()*3.5;
-      bursts.push({ x: e.clientX, y: e.clientY, vx: Math.cos(a)*sp, vy: Math.sin(a)*sp, r: 0.8+Math.random()*2.2, life: 1, decay: 0.016+Math.random()*0.014 });
+  class Particle {
+    constructor(isDrop) {
+      this.isDrop = isDrop;
+      this.reset();
     }
-  });
-
-  // Auto ambient ripples
-  setInterval(() => {
-    const ox = (Math.random()-0.5)*W*0.65, oy = (Math.random()-0.5)*H*0.65;
-    ripples.push({ x: W/2+ox, y: H/2+oy, r: 0, maxR: 70+Math.random()*130, op: 0.2, sp: 0.9+Math.random()*0.8 });
-  }, 2000);
-
-  // 3-depth drop layers
-  function makeDrops(n, depth) {
-    return Array.from({length:n}, () => {
-      const roll = Math.random();
-      const color = roll < 0.5 ? [0,201,172] : roll < 0.75 ? [120,220,210] : [200,235,230];
-      return {
-        x: Math.random()*W, y: Math.random()*H,
-        vx: (Math.random()-.5)*(0.08+depth*0.28),
-        vy: 0.06+depth*0.32+Math.random()*0.18,
-        r: 0.3+depth*1.6+Math.random()*1.2,
-        alpha: 0.03+depth*0.16+Math.random()*0.1,
-        wobble: Math.random()*Math.PI*2,
-        wobbleSpeed: 0.006+Math.random()*0.014,
-        color, depth
-      };
-    });
+    reset() {
+      if (this.isDrop) {
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.vx = (Math.random() - .5) * .3;
+        this.vy = Math.random() * .4 + .1;
+        this.r = Math.random() * 2.5 + .8;
+        this.alpha = Math.random() * .35 + .05;
+      } else {
+        const a = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 200 + 80;
+        this.baseX = W/2 + Math.cos(a) * radius;
+        this.baseY = H/2 + Math.sin(a) * radius;
+        this.x = this.baseX; this.y = this.baseY;
+        this.r = Math.random() * 2 + 1;
+        this.speed = Math.random() * .005 + .002;
+        this.angle = a;
+      }
+    }
+    update(scroll) {
+      if (this.isDrop) {
+        this.x += this.vx; this.y += this.vy + scroll * .008;
+        if (this.y > H+20) { this.y = -20; this.x = Math.random() * W; }
+        if (this.x > W+20) this.x = -20;
+        if (this.x < -20) this.x = W+20;
+      } else {
+        this.angle += this.speed;
+        const t = Date.now() * .001;
+        const wave = Math.sin(t + this.baseX * .005) * 15;
+        this.x = W/2 + Math.cos(this.angle) * (Math.hypot(this.baseX - W/2, this.baseY - H/2) + wave);
+        this.y = H/2 + Math.sin(this.angle) * (Math.hypot(this.baseX - W/2, this.baseY - H/2) + Math.cos(t + this.baseY * .005) * 15);
+      }
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      if (this.isDrop) {
+        const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * 2);
+        g.addColorStop(0, `rgba(200,220,215,${this.alpha})`);
+        g.addColorStop(1, `rgba(0,196,167,0)`);
+        ctx.fillStyle = g;
+      } else {
+        ctx.fillStyle = `rgba(0,196,167,${.5/Math.hypot(this.x-W/2,this.y-H/2)*60})`;
+      }
+      ctx.fill();
+    }
   }
-
-  // Orbital orbs
-  function makeOrbs(n) {
-    return Array.from({length:n}, () => {
-      const a = Math.random()*Math.PI*2;
-      const r = (Math.random()*190+55)*(Math.random()<0.4?0.45:1);
-      const bx = W/2+Math.cos(a)*r, by = H/2+Math.sin(a)*r*0.72;
-      return {
-        x: bx, y: by, bx, by,
-        r: 0.8+Math.random()*2.4,
-        speed: (Math.random()*0.0035+0.0008)*(Math.random()<0.5?1:-1),
-        angle: a,
-        orbitR: Math.hypot(bx-W/2, by-H/2),
-        phase: Math.random()*Math.PI*2,
-        glow: 1.5+Math.random()*3.5
-      };
-    });
-  }
-
-  // Light rays
-  const rays = Array.from({length:8}, () => ({
-    x: Math.random()*W,
-    w: 15+Math.random()*55,
-    alpha: 0.008+Math.random()*0.022,
-    phase: Math.random()*Math.PI*2
-  }));
 
   let drops = [], orbs = [];
   function init() {
-    drops = [...makeDrops(45,0.12), ...makeDrops(55,0.5), ...makeDrops(28,0.92)];
-    orbs = makeOrbs(170);
+    drops = Array.from({length:80}, () => new Particle(true));
+    orbs = Array.from({length:120}, () => new Particle(false));
   }
   init();
 
-  function drawFrame() {
+  function draw() {
     ctx.clearRect(0,0,W,H);
-    const t = Date.now()*0.001;
+    // Radial glow
+    const rg = ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,Math.min(W,H)*.6);
+    rg.addColorStop(0,'rgba(0,196,167,0.06)');
+    rg.addColorStop(1,'transparent');
+    ctx.fillStyle = rg; ctx.fillRect(0,0,W,H);
 
-    // Deep background — very dark teal-black
-    const bg = ctx.createRadialGradient(W*0.5, H*0.32, 0, W*0.5, H*0.5, Math.max(W,H)*1.1);
-    bg.addColorStop(0,'rgba(3,16,13,1)');
-    bg.addColorStop(0.45,'rgba(2,11,9,1)');
-    bg.addColorStop(1,'rgba(1,6,5,1)');
-    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    const scroll = window.scrollY;
+    drops.forEach(p => { p.update(scroll); p.draw(); });
+    orbs.forEach(p => { p.update(scroll); p.draw(); });
 
-    // Underwater light rays
-    rays.forEach((ray,i) => {
-      const sway = Math.sin(t*0.22+ray.phase)*35;
-      const x = ray.x + sway;
-      const grad = ctx.createLinearGradient(x,0,x,H*0.82);
-      grad.addColorStop(0,`rgba(0,201,172,${ray.alpha})`);
-      grad.addColorStop(0.55,`rgba(0,160,138,${ray.alpha*0.35})`);
-      grad.addColorStop(1,'rgba(0,140,120,0)');
-      ctx.beginPath();
-      ctx.moveTo(x-ray.w/2,0);
-      ctx.lineTo(x+ray.w/2,0);
-      ctx.lineTo(x+ray.w*0.55,H*0.82);
-      ctx.lineTo(x-ray.w*0.55,H*0.82);
-      ctx.closePath();
-      ctx.fillStyle=grad; ctx.fill();
-    });
-
-    // Depth haze
-    for (let i=0;i<4;i++) {
-      const lx = W*(0.15+i*0.25)+Math.sin(t*0.28+i*1.2)*45;
-      const ly = H*(0.25+i*0.18)+Math.cos(t*0.2+i)*28;
-      const lg = ctx.createRadialGradient(lx,ly,0,lx,ly,W*0.32);
-      lg.addColorStop(0,`rgba(0,196,167,${0.022-i*0.004})`);
-      lg.addColorStop(1,'transparent');
-      ctx.fillStyle=lg; ctx.fillRect(0,0,W,H);
-    }
-
-    // Central glow — breathing
-    const breath = 0.055+Math.sin(t*0.5)*0.02;
-    const cg = ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,Math.min(W,H)*0.58);
-    cg.addColorStop(0,`rgba(0,201,172,${breath})`);
-    cg.addColorStop(0.5,`rgba(0,150,128,0.03)`);
-    cg.addColorStop(1,'transparent');
-    ctx.fillStyle=cg; ctx.fillRect(0,0,W,H);
-
-    // Mouse glow
-    if (mouseActive) {
-      const mg = ctx.createRadialGradient(mx,my,0,mx,my,180);
-      mg.addColorStop(0,'rgba(0,201,172,0.11)');
-      mg.addColorStop(0.4,'rgba(0,201,172,0.04)');
-      mg.addColorStop(1,'transparent');
-      ctx.fillStyle=mg; ctx.fillRect(0,0,W,H);
-    }
-
-    // Far drops
-    drops.filter(d=>d.depth<0.3).forEach(p => {
-      p.wobble+=p.wobbleSpeed;
-      p.x+=p.vx+Math.sin(p.wobble)*0.12;
-      p.y+=p.vy;
-      if(p.y>H+15){p.y=-10;p.x=Math.random()*W;}
-      if(p.x>W+10)p.x=-10; if(p.x<-10)p.x=W+10;
-      const [r,g,b]=p.color;
-      const gr=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
-      gr.addColorStop(0,`rgba(${r},${g},${b},${p.alpha})`);
-      gr.addColorStop(1,`rgba(${r},${g},${b},0)`);
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r*3,0,Math.PI*2);
-      ctx.fillStyle=gr; ctx.fill();
-    });
-
-    // Orb connections
+    // Connect nearby orbs
+    ctx.strokeStyle = 'rgba(0,196,167,0.05)';
+    ctx.lineWidth = .5;
     for (let i=0;i<orbs.length;i++) {
       for (let j=i+1;j<orbs.length;j++) {
-        const dx=orbs[i].x-orbs[j].x, dy=orbs[i].y-orbs[j].y;
-        const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<88) {
-          const prox = mouseActive ? Math.max(
-            Math.max(0,1-Math.hypot(orbs[i].x-mx,orbs[i].y-my)/210),
-            Math.max(0,1-Math.hypot(orbs[j].x-mx,orbs[j].y-my)/210)
-          ) : 0;
-          const a=(1-d/88)*(0.055+prox*0.14);
+        const dx = orbs[i].x-orbs[j].x, dy = orbs[i].y-orbs[j].y;
+        const d = Math.sqrt(dx*dx+dy*dy);
+        if (d < 80) {
           ctx.beginPath();
           ctx.moveTo(orbs[i].x,orbs[i].y);
           ctx.lineTo(orbs[j].x,orbs[j].y);
-          ctx.strokeStyle=`rgba(0,201,172,${a})`;
-          ctx.lineWidth=0.35+prox*0.7;
           ctx.stroke();
         }
       }
     }
-
-    // Orbs
-    orbs.forEach(o => {
-      o.angle+=o.speed;
-      const wave=Math.sin(t*0.9+o.phase)*20, waveY=Math.cos(t*0.65+o.phase)*13;
-      o.x=W/2+Math.cos(o.angle)*(o.orbitR+wave);
-      o.y=H/2+Math.sin(o.angle)*(o.orbitR*0.72+waveY);
-      if(mouseActive){
-        const dx=mx-o.x, dy=my-o.y, d=Math.sqrt(dx*dx+dy*dy);
-        if(d<220&&d>1){o.x+=dx/d*0.45; o.y+=dy/d*0.45;}
-      }
-      const dist=Math.hypot(o.x-W/2,o.y-H/2);
-      const prox=mouseActive?Math.max(0,1-Math.hypot(o.x-mx,o.y-my)/220):0;
-      const alpha=Math.min(0.9,(0.28+prox*0.55)*(1-dist/(Math.min(W,H)*0.72)));
-      if(alpha<=0) return;
-      const gs=o.glow+prox*9;
-      const og=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,gs*3.2);
-      og.addColorStop(0,`rgba(0,201,172,${alpha})`);
-      og.addColorStop(0.35,`rgba(0,201,172,${alpha*0.28})`);
-      og.addColorStop(1,'rgba(0,201,172,0)');
-      ctx.beginPath(); ctx.arc(o.x,o.y,gs*3.2,0,Math.PI*2);
-      ctx.fillStyle=og; ctx.fill();
-      ctx.beginPath(); ctx.arc(o.x,o.y,o.r+prox*1.8,0,Math.PI*2);
-      ctx.fillStyle=`rgba(0,225,192,${alpha})`; ctx.fill();
-    });
-
-    // Near drops
-    drops.filter(d=>d.depth>=0.3).forEach(p => {
-      p.wobble+=p.wobbleSpeed;
-      p.x+=p.vx+Math.sin(p.wobble)*0.12;
-      p.y+=p.vy;
-      if(mouseActive&&p.depth>0.5){
-        const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);
-        if(d<130){p.x+=dx/d*(130-d)*0.018; p.y+=dy/d*(130-d)*0.018;}
-      }
-      if(p.y>H+15){p.y=-10;p.x=Math.random()*W;}
-      if(p.x>W+10)p.x=-10; if(p.x<-10)p.x=W+10;
-      const [r,g,b]=p.color;
-      const gr=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
-      gr.addColorStop(0,`rgba(${r},${g},${b},${p.alpha})`);
-      gr.addColorStop(1,'rgba(0,201,172,0)');
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r*3,0,Math.PI*2);
-      ctx.fillStyle=gr; ctx.fill();
-    });
-
-    // Ripples
-    ripples.forEach(rp => {
-      if(rp.delay&&rp.delay-->0) return;
-      const fade=1-rp.r/rp.maxR;
-      ctx.beginPath(); ctx.arc(rp.x,rp.y,rp.r,0,Math.PI*2);
-      ctx.strokeStyle=`rgba(0,210,182,${rp.op*fade*fade})`;
-      ctx.lineWidth=1.4*fade+0.2; ctx.stroke();
-      if(rp.r>30){
-        ctx.beginPath(); ctx.arc(rp.x,rp.y,rp.r*0.58,0,Math.PI*2);
-        ctx.strokeStyle=`rgba(0,220,190,${rp.op*0.28*fade})`;
-        ctx.lineWidth=0.5; ctx.stroke();
-      }
-      rp.r+=rp.sp;
-    });
-    for(let i=ripples.length-1;i>=0;i--){if(ripples[i].r>ripples[i].maxR)ripples.splice(i,1);}
-
-    // Burst particles
-    bursts.forEach(b => {
-      b.x+=b.vx; b.y+=b.vy; b.vx*=0.95; b.vy*=0.95; b.life-=b.decay;
-      const bg2=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r*3.5);
-      bg2.addColorStop(0,`rgba(0,225,190,${b.life*0.85})`);
-      bg2.addColorStop(1,'rgba(0,201,172,0)');
-      ctx.beginPath(); ctx.arc(b.x,b.y,b.r*3.5,0,Math.PI*2);
-      ctx.fillStyle=bg2; ctx.fill();
-    });
-    for(let i=bursts.length-1;i>=0;i--){if(bursts[i].life<=0)bursts.splice(i,1);}
-
-    requestAnimationFrame(drawFrame);
+    requestAnimationFrame(draw);
   }
-  drawFrame();
+  draw();
 })();
 
 /* ─── SCROLL REVEAL ─── */
@@ -1807,7 +1658,7 @@ const translations = {
     'services-label': 'خدماتنا',
     'contact-title': 'دعنا نحمي بيئتك',
     'govt-label': 'الشراكات الحكومية والمؤسسية',
-    'footer-desc': 'شركة إيكو للخدمات البيئية LLC — نحمي مياه الإمارات من خلال حلول بيئية مبتكرة ومستدامة منذ 2016.',
+    'footer-desc': 'شركة إيكو للخدمات البيئية ذ.م.م — نحمي مياه الإمارات من خلال حلول بيئية مبتكرة ومستدامة منذ 2016.',
   }
 };
 
@@ -1846,11 +1697,6 @@ function toggleLang() {
   set('.footer-brand-desc', 'footer-desc');
 }
 
-
-
-/* ─── HERO HINT ─── */
-.hero-hint{font-family:var(--mono);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);opacity:0;animation:fadeUp .8s 2.2s ease both,hintPulse 3s 3s ease-in-out infinite;margin-top:28px;position:relative;z-index:10}
-@keyframes hintPulse{0%,100%{opacity:.25}50%{opacity:.55}}
 
 /* ─── PROGRESS BAR ─── */
 window.addEventListener('scroll', () => {

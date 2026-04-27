@@ -134,6 +134,37 @@ Current AMC clients include: Marsa Ajman Mall, Themar Al Bahar, Blue Marine Fish
 
 ---
 
+
+## AI Agent & Lead Capture
+
+### Jotform AI Agent (Robin)
+- **Agent ID:** 019dbd271be77876b7e36ce06ac88fd491ef
+- **Agent URL:** https://agent.jotform.com/019dbd271be77876b7e36ce06ac88fd491ef
+- **Embedded:** Floating chatbot widget on website (bottom right)
+- **Trained on:** ECO_Agent_Training.pdf — full knowledge base
+- **Pricing flow:** Qualifies grease trap size before giving price
+- **QR Code:** Generated for business cards, proposals, and print materials
+
+### Jotform Quote Form
+- **Form ID:** 261008161739051
+- **Public URL:** https://form.jotform.com/261008161739051
+- **Embedded:** Lightbox popup button in contact section
+- **Fields:** 13 fields including company, services, urgency, emirate
+- **Pipeline:** Submissions feed automatically into daily lead report
+
+### Lead Pipeline (Manus AI)
+- **Active leads:** 11 (as of April 24, 2026)
+- **Outreach sent:** Touch 1 emails to all leads
+- **Notable targets:** Emaar Properties, Rotana Hotels, Ramada Ajman, Sharjah Airport, Lulu Hypermarket, City Centre Ajman (Majid Al Futtaim)
+- **Proposal sent:** Eng. Mahmoud Hussein — Marsa Properties LLC
+
+## Training Files
+
+| File | Purpose |
+|---|---|
+| `ECO_Agent_Training.pdf` | Full AI agent knowledge base — services, pricing, flow, contacts |
+
+
 ## Tech Stack
 
 - Pure HTML / CSS / JS — zero dependencies, zero build step
